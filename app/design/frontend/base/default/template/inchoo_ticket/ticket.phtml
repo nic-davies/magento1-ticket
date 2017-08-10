@@ -22,16 +22,16 @@
             if ((int)$ticket->getIsResolved() === 1) {
         ?>
         <li>
-            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/updateTicket') ?><?php echo $ticket->getId() ?>">Reopen Ticket</a>
+            <a href="<?php echo $this->getUrl('*/*/updateTicket', array('id' => $ticket->getId())) ?>">Reopen Ticket</a>
         </li>
         <?php } else { ?>
         <li>
-            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/updateTicket') ?><?php echo $ticket->getId() ?>">Close Ticket</a>
+            <a href="<?php echo $this->getUrl('*/*/updateTicket', array('id' => $ticket->getId())) ?>">Close Ticket</a>
         </li>
         <?php } ?>
 
         <li>
-            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/deleteTicket') ?><?php echo $ticket->getId(); ?>">Delete</a>
+            <a href="<?php echo $this->getUrl('*/*/deleteTicket', array('id' => $ticket->getId())) ?>">Delete</a>
         </li>
     </ul>
 </div>
