@@ -3,7 +3,7 @@
         <?php echo $this->__('My Tickets') ?>
     </h1>
 
-    <span><a href="<?php echo $this->getUrl('inchoo_ticket/ticket/newTicket') ?>" class="btn-add">Create Ticket</a></span>
+    <span><a href="<?php echo $this->getUrl('*/*/newTicket') ?>" class="btn-add">Create Ticket</a></span>
 </div>
 
 <?php
@@ -24,7 +24,7 @@
         <?php foreach ($tickets as $ticket): ?>
             <tr>
                 <td>
-                    <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/ticket') ?>id/<?php echo $ticket->getId() ?>">
+                    <a href="<?php echo $this->getUrl('*/*/ticket', array('id' => $ticket->getId())) ?>">
                         #<?php echo $this->escapeHtml($ticket->getId()) ?>
                     </a>
                 </td>
