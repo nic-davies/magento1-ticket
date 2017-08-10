@@ -1,0 +1,34 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Create a New Ticket') ?></h1>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<form action="<?php echo Mage::getUrl('inchoo_ticket/ticket/createTicket') ?>" method="post">
+    <div class="fieldset">
+        <ul class="form-list">
+            <li>
+                <label for="subject" class="required"><em>*</em><?php echo Mage::helper('core')->quoteEscape($this->__('Subject')) ?></label>
+                <div class="input-box">
+                    <input type="text" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subject')) ?>" class="input-text required-entry" name="subject" id="subject" />
+                </div>
+            </li>
+
+            <li>
+                <label for="message" class="required"><em>*</em><?php echo Mage::helper('core')->quoteEscape($this->__('Message')) ?></label>
+                <div class="input-box">
+                    <textarea name="message" id="message" cols="30" rows="10" class="required-entry input-text"></textarea>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>
+
+<script type="text/javascript">
+</script>

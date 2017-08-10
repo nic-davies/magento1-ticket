@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <customer>
+            <children>
+                <inchoo_ticket translate="title" module="inchoo_ticket">
+                    <title>Tickets</title>
+                    <action>adminhtml/inchoo_ticket/index</action>
+                    <sort_order>25</sort_order>
+                </inchoo_ticket>
+            </children>
+        </customer>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <customer>
+                        <children>
+                            <inchoo_ticket>
+                                <title>Inchoo Ticket</title>
+                            </inchoo_ticket>
+                        </children>
+                    </customer>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

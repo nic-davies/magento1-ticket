@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inchoo_Ticket>
+            <version>1.0.0.0</version>
+        </Inchoo_Ticket>
+    </modules>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Inchoo_Ticket before="Mage_Adminhtml">Inchoo_Ticket_Adminhtml</Inchoo_Ticket>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <inchoo_ticket>
+                    <file>inchoo_ticket.xml</file>
+                </inchoo_ticket>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <frontend>
+        <routers>
+            <inchoo_ticket>
+                <use>standard</use>
+                <args>
+                    <module>Inchoo_Ticket</module>
+                    <frontName>ticket</frontName>
+                </args>
+            </inchoo_ticket>
+        </routers>
+
+        <layout>
+            <updates>
+                <inchoo_ticket>
+                    <file>inchoo_ticket.xml</file>
+                </inchoo_ticket>
+            </updates>
+        </layout>
+    </frontend>
+
+    <global>
+        <blocks>
+            <inchoo_ticket>
+                <class>Inchoo_Ticket_Block</class>
+            </inchoo_ticket>
+        </blocks>
+
+        <models>
+            <inchoo_ticket>
+                <class>Inchoo_Ticket_Model</class>
+                <resourceModel>inchoo_ticket_resource</resourceModel>
+            </inchoo_ticket>
+
+            <inchoo_ticket_reply>
+                <class>Inchoo_TicketReply_Model</class>
+                <resourceModel>inchoo_ticket_reply_resource</resourceModel>
+            </inchoo_ticket_reply>
+
+            <inchoo_ticket_resource>
+                <class>Inchoo_Ticket_Model_Resource</class>
+
+                <entities>
+                    <ticket>
+                        <table>inchoo_ticket_ticket</table>
+                    </ticket>
+
+                    <ticket_reply>
+                        <table>inchoo_ticket_reply</table>
+                    </ticket_reply>
+                </entities>
+            </inchoo_ticket_resource>
+        </models>
+
+        <helpers>
+            <inchoo_ticket>
+                <class>Inchoo_Ticket_Helper</class>
+            </inchoo_ticket>
+        </helpers>
+
+        <resources>
+            <inchoo_ticket_setup>
+                <setup>
+                    <module>Inchoo_Ticket</module>
+                </setup>
+            </inchoo_ticket_setup>
+        </resources>
+    </global>
+</config>

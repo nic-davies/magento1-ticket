@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="customer">
+                <label>My Tickets</label>
+                <url helper="customer/getAccountUrl"/>
+                <title>My Tickets</title>
+                <prepare/>
+                <urlParams/>
+                <position>10</position>
+            </action>
+        </reference>
+    </default>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="inchoo_ticket"><name>tickets</name><path>inchoo_ticket/ticket/myTickets</path><label>My Tickets</label></action>
+        </reference>
+    </customer_account>
+
+    <inchoo_ticket_ticket_mytickets>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="inchoo_ticket/ticket" name="my.tickets.pagination" as="my.tickets.pagination"/>
+        </reference>
+
+        <reference name="content">
+            <block type="inchoo_ticket/ticket" name="my.tickets" as="my.tickets"
+                   template="inchoo_ticket/tickets.phtml"/>
+        </reference>
+
+        <update handle="customer_account"/>
+    </inchoo_ticket_ticket_mytickets>
+
+    <inchoo_ticket_ticket_newticket>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="core/template" name="my.tickets" as="my.tickets"
+                   template="inchoo_ticket/new_ticket.phtml"/>
+        </reference>
+
+        <update handle="customer_account"/>
+    </inchoo_ticket_ticket_newticket>
+
+    <inchoo_ticket_ticket_ticket>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="inchoo_ticket/ticket" name="my.ticket" as="my.ticket"
+                   template="inchoo_ticket/ticket.phtml"/>
+        </reference>
+
+        <update handle="customer_account"/>
+    </inchoo_ticket_ticket_ticket>
+</layout>

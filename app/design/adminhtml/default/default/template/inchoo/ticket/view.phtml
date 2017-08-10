@@ -1,0 +1,71 @@
+<?php
+    $ticket = $this->getTicketWithCustomer();
+    $ticketReplies = $this->getTicketReplies();
+?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>">
+                <?php echo $this->getHeaderHtml() ?>
+            </td>
+
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <table cellspacing="0">
+        <colgroup>
+            <col width="25%"><col>
+        </colgroup>
+
+        <tbody>
+            <tr class="first odd">
+                <th class="label">
+                    <?php echo $this->escapeHtml($ticket->getCustomerName()) ?>
+                    <small><?php echo date("D, j M, Y", strtotime($ticket->getTimestamp())) ?></small>
+                </th>
+                <td class="data last">
+                    <?php echo $this->escapeHtml($ticket->getMessage()) ?>
+                </td>
+            </tr>
+
+            <?php if ($ticketReplies->count() > 0): ?>
+                <?php foreach ($ticketReplies as $reply) { ?>
+                    <tr class="first">
+                        <th class="label">
+                            <?php
+                                if (!is_null($reply->getCustomerId())) {
+                            ?>
+                                <?php echo $this->escapeHtml($reply->getCustomerName()); ?>
+                            <?php } else { ?>
+                                <strong>You (admin)</strong>
+                            <?php } ?>
+                            <small><?php echo date("D, j M, Y", strtotime($reply->getTimestamp())) ?></small>
+                        </th>
+                        <td class="data last">
+                            <?php echo $this->escapeHtml($reply->getMessage()) ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <form id="comments_block" action="<?php echo $this->getSubmitUrl() ?>" method="post">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+
+        <span class="field-row">
+            <label class="normal" for="message"><?php echo Mage::helper('inchoo_ticket')->__('Your Reply') ?></label>
+            <textarea name="message" rows="3" cols="5" style="height:6em; width:99%;" id="message"></textarea>
+        </span>
+
+        <div class="f-right">
+            <button type="submit" id="submitMessage">Submit</button>
+        </div>
+    </form>
+</div>

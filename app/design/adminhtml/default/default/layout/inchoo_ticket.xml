@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_inchoo_ticket_view>
+        <reference name="content">
+            <block type="inchoo_ticket/adminhtml_view" name="inchoo.ticket.view" as="inchoo.ticket.view"
+                   template="inchoo/ticket/view.phtml"/>
+        </reference>
+    </adminhtml_inchoo_ticket_view>
+</layout>

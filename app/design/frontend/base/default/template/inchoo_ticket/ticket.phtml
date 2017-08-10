@@ -1,0 +1,111 @@
+<?php
+    $ticket = $this->getTicket();
+    $replies = $this->getTicketReplies();
+?>
+
+<div class="page-title">
+    <h1>
+        <?php echo $this->__('Ticket Id') ?> #<?php echo $ticket->getTicketId() ?>
+        <small>
+            <?php
+                if ((int)$ticket->getIsResolved() === 1) {
+            ?>
+                - Closed
+            <?php } ?>
+        </small>
+    </h1>
+</div>
+
+<div>
+    <ul>
+        <?php
+            if ((int)$ticket->getIsResolved() === 1) {
+        ?>
+        <li>
+            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/updateTicket') ?><?php echo $ticket->getId() ?>">Reopen Ticket</a>
+        </li>
+        <?php } else { ?>
+        <li>
+            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/updateTicket') ?><?php echo $ticket->getId() ?>">Close Ticket</a>
+        </li>
+        <?php } ?>
+
+        <li>
+            <a href="<?php echo $this->getUrl('inchoo_ticket/ticket/deleteTicket') ?><?php echo $ticket->getId(); ?>">Delete</a>
+        </li>
+    </ul>
+</div>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<div>
+    <table class="data-table" id="product-attribute-specs-table">
+        <colgroup>
+            <col width="25%"><col>
+        </colgroup>
+
+        <tbody>
+            <tr class="first odd">
+                <th class="label">
+                    You <small><?php echo date("D, j M, Y", strtotime($ticket->getTimestamp())) ?></small>
+                </th>
+                <td class="data last">
+                    <?php echo $this->escapeHtml($ticket->getMessage()) ?>
+                </td>
+            </tr>
+
+            <?php if ($replies->count() > 0): ?>
+                <?php foreach ($replies as $reply) { ?>
+                    <tr class="first <?php if (is_null($reply->getCustomerId())) { ?>odd<?php } ?>">
+                        <th class="label">
+                            <?php
+                                if (!is_null($reply->getCustomerId())) {
+                            ?>
+                                You
+                            <?php } else { ?>
+                                <strong>Admin</strong>
+                            <?php } ?>
+                            <small><?php echo date("D, j M, Y", strtotime($reply->getTimestamp())) ?></small>
+                        </th>
+                        <td class="data last">
+                            <?php echo $this->escapeHtml($reply->getMessage()) ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+    <br>
+</div>
+
+<?php if ((int)$ticket->getIsResolved() !== 1) { ?>
+    <form action="<?php echo Mage::getUrl('inchoo_ticket/ticket/createReply') ?>" method="post">
+        <input type="hidden" name="ticketId" id="ticketId" value="<?php echo $ticket->getTicketId(); ?>">
+
+        <div class="fieldset">
+            <ul class="form-list">
+                <li>
+                    <label for="message"
+                           class="required"><em>*</em><?php echo Mage::helper('core')->quoteEscape($this->__('Your Reply')) ?>
+                    </label>
+                    <div class="input-box">
+                        <textarea name="message" id="message" cols="30" rows="2"
+                                  class="required-entry input-text"></textarea>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="buttons-set">
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+            <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
+                    <small>&laquo;</small><?php echo $this->__('Back') ?></a></p>
+            <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>"
+                    class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+        </div>
+    </form>
+<?php } ?>
+
+<script type="text/javascript">
+</script>
